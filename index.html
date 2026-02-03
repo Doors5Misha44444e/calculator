@@ -28,23 +28,25 @@
                         <button class="btn btn-operator" onclick="calc.appendOperator('*')">×</button>
                         <button class="btn btn-backspace" onclick="calc.backspace()">←</button>
                         
-                        <button class="btn btn-number" onclick="calc.appendNumber('7')">7</button>
-                        <button class="btn btn-number" onclick="calc.appendNumber('8')">8</button>
-                        <button class="btn btn-number" onclick="calc.appendNumber('9')">9</button>
+                        <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('7') : calc.appendNumber('7')">7</button>
+                        <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('8') : calc.appendNumber('8')">8</button>
+                        <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('9') : calc.appendNumber('9')">9</button>
                         <button class="btn btn-operator" onclick="calc.appendOperator('-')">−</button>
                         
-                        <button class="btn btn-number" onclick="calc.appendNumber('4')">4</button>
-                        <button class="btn btn-number" onclick="calc.appendNumber('5')">5</button>
-                        <button class="btn btn-number" onclick="calc.appendNumber('6')">6</button>
+                        <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('4') : calc.appendNumber('4')">4</button>
+                        <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('5') : calc.appendNumber('5')">5</button>
+                        <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('6') : calc.appendNumber('6')">6</button>
                         <button class="btn btn-operator" onclick="calc.appendOperator('+')">+</button>
                         
-                        <button class="btn btn-number" onclick="calc.appendNumber('1')">1</button>
-                        <button class="btn btn-number" onclick="calc.appendNumber('2')">2</button>
-                        <button class="btn btn-number" onclick="calc.appendNumber('3')">3</button>
+                        <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('1') : calc.appendNumber('1')">1</button>
+                        <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('2') : calc.appendNumber('2')">2</button>
+                        <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('3') : calc.appendNumber('3')">3</button>
                         <button class="btn btn-equals" onclick="calc.calculate()" style="grid-row: span 2;">=</button>
                         
-                        <button class="btn btn-number" onclick="calc.appendNumber('0')" style="grid-column: span 2;">0</button>
-                        <button class="btn btn-number" onclick="calc.appendNumber('.')">.</button>
+                        <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('0') : calc.appendNumber('0')" style="grid-column: span 3;">0</button>
+                        <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('/') : calc.appendNumber('.')">.</button>
+                        
+                        <button class="btn btn-sign" onclick="calc.toggleSign()" style="grid-column: span 4;">+/−</button>
                     </div>
                 </div>
             </section>
