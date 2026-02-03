@@ -3,54 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Калькулятор 2026</title>
+    <title>Math Lab 2026</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="background"></div>
     
     <div class="container">
-        <header class="header">
-            <div class="logo">
-                <h1>CALC</h1>
-                <p class="subtitle">Калькулятор 2026</p>
-            </div>
-        </header>
-
-        <main class="main-content">
-            <section class="calculator-card">
-                <div class="calculator">
-                    <div class="display" id="display">0</div>
-                    
-                    <div class="buttons-grid">
-                        <button class="btn btn-clear" onclick="calc.clear()">C</button>
-                        <button class="btn btn-operator" onclick="calc.appendOperator('/')">÷</button>
-                        <button class="btn btn-operator" onclick="calc.appendOperator('*')">×</button>
-                        <button class="btn btn-backspace" onclick="calc.backspace()">←</button>
-                        
-                        <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('7') : calc.appendNumber('7')">7</button>
-                        <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('8') : calc.appendNumber('8')">8</button>
-                        <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('9') : calc.appendNumber('9')">9</button>
-                        <button class="btn btn-operator" onclick="calc.appendOperator('-')">−</button>
-                        
-                        <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('4') : calc.appendNumber('4')">4</button>
-                        <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('5') : calc.appendNumber('5')">5</button>
-                        <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('6') : calc.appendNumber('6')">6</button>
-                        <button class="btn btn-operator" onclick="calc.appendOperator('+')">+</button>
-                        
-                        <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('1') : calc.appendNumber('1')">1</button>
-                        <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('2') : calc.appendNumber('2')">2</button>
-                        <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('3') : calc.appendNumber('3')">3</button>
-                        <button class="btn btn-equals" onclick="calc.calculate()" style="grid-row: span 2;">=</button>
-                        
-                        <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('0') : calc.appendNumber('0')" style="grid-column: span 3;">0</button>
-                        <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('/') : calc.appendNumber('.')">.</button>
-                        
-                        <button class="btn btn-sign" onclick="calc.toggleSign()" style="grid-column: span 4;">+/−</button>
-                    </div>
+        <!-- МЕНЮ ЕКРАН -->
+        <div id="menuScreen" class="screen active">
+            <header class="header">
+                <div class="logo">
+                    <h1>MATH LAB</h1>
+                    <p class="subtitle">2026</p>
                 </div>
-            </section>
-        </main>
+            </header>
+
+            <main class="main-content">
+                <div class="menu-container">
+                    <button class="menu-btn calculator-btn" onclick="app.showCalculator()">
+                        <div class="menu-icon">🧮</div>
+                        <div class="menu-title">КАЛЬКУЛЯТОР</div>
+                        <div class="menu-desc">Розрахунки з дробами</div>
+                    </button>
+                    
+                    <button class="menu-btn tests-btn" onclick="app.showTests()">
+                        <div class="menu-icon">📝</div>
+                        <div class="menu-title">ТЕСТИ</div>
+                        <div class="menu-desc">Завдання з математики</div>
+                    </button>
+                </div>
+            </main>
+        </div>
+
+        <!-- КАЛЬКУЛЯТОР ЕКРАН -->
+        <div id="calculatorScreen" class="screen">
+            <header class="header">
+                <div class="logo">
+                    <h1>CALC</h1>
+                    <p class="subtitle">Калькулятор</p>
+                </div>
+                <button class="btn-back" onclick="app.showMenu()">← Назад</button>
+            </header>
+
+            <main class="main-content">
+                <section class="calculator-card">
+                    <div class="calculator">
+                        <div class="display" id="display">0</div>
+                        
+                        <div class="buttons-grid">
+                            <button class="btn btn-clear" onclick="calc.clear()">C</button>
+                            <button class="btn btn-operator" onclick="calc.appendOperator('/')">÷</button>
+                            <button class="btn btn-operator" onclick="calc.appendOperator('*')">×</button>
+                            <button class="btn btn-backspace" onclick="calc.backspace()">←</button>
+                            
+                            <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('7') : calc.appendNumber('7')">7</button>
+                            <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('8') : calc.appendNumber('8')">8</button>
+                            <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('9') : calc.appendNumber('9')">9</button>
+                            <button class="btn btn-operator" onclick="calc.appendOperator('-')">−</button>
+                            
+                            <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('4') : calc.appendNumber('4')">4</button>
+                            <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('5') : calc.appendNumber('5')">5</button>
+                            <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('6') : calc.appendNumber('6')">6</button>
+                            <button class="btn btn-operator" onclick="calc.appendOperator('+')">+</button>
+                            
+                            <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('1') : calc.appendNumber('1')">1</button>
+                            <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('2') : calc.appendNumber('2')">2</button>
+                            <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('3') : calc.appendNumber('3')">3</button>
+                            <button class="btn btn-equals" onclick="calc.calculate()" style="grid-row: span 2;">=</button>
+                            
+                            <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('0') : calc.appendNumber('0')" style="grid-column: span 3;">0</button>
+                            <button class="btn btn-number" onclick="calc.fractionMode ? calc.appendFractionPart('/') : calc.appendNumber('.')">.</button>
+                            
+                            <button class="btn btn-sign" onclick="calc.toggleSign()" style="grid-column: span 4;">+/−</button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- ТЕСТИ ЕКРАН -->
+        <div id="testsScreen" class="screen">
+            <header class="header">
+                <div class="logo">
+                    <h1>ТЕСТИ</h1>
+                    <p class="subtitle">Математика</p>
+                </div>
+                <button class="btn-back" onclick="app.showMenu()">← Назад</button>
+            </header>
+
+            <main class="main-content">
+                <section class="tests-card">
+                    <div class="test-content" id="testContent">
+                        <!-- Тест буде завантажений тут -->
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- ВИБІР КЛАСУ ЕКРАН -->
+        <div id="classScreen" class="screen">
+            <header class="header">
+                <div class="logo">
+                    <h1>ВИБІР РІВНЯ</h1>
+                    <p class="subtitle">Оберіть складність</p>
+                </div>
+                <button class="btn-back" onclick="app.showTests()">← Назад</button>
+            </header>
+
+            <main class="main-content">
+                <div class="class-container">
+                    <button class="class-btn" onclick="app.startTestLevel(1)">
+                        <div class="class-num">1</div>
+                        <div class="class-label">1 клас</div>
+                    </button>
+                    <button class="class-btn" onclick="app.startTestLevel(2)">
+                        <div class="class-num">2</div>
+                        <div class="class-label">2 клас</div>
+                    </button>
+                    <button class="class-btn" onclick="app.startTestLevel(3)">
+                        <div class="class-num">3</div>
+                        <div class="class-label">3 клас</div>
+                    </button>
+                    <button class="class-btn" onclick="app.startTestLevel(4)">
+                        <div class="class-num">4</div>
+                        <div class="class-label">4 клас</div>
+                    </button>
+                    <button class="class-btn" onclick="app.startTestLevel(5)">
+                        <div class="class-num">5</div>
+                        <div class="class-label">5 клас</div>
+                    </button>
+                    <button class="class-btn" onclick="app.startTestLevel(6)">
+                        <div class="class-num">6</div>
+                        <div class="class-label">6 клас</div>
+                    </button>
+                    <button class="class-btn" onclick="app.startTestLevel(7)">
+                        <div class="class-num">7</div>
+                        <div class="class-label">7 клас</div>
+                    </button>
+                    <button class="class-btn" onclick="app.startTestLevel(8)">
+                        <div class="class-num">8</div>
+                        <div class="class-label">8 клас</div>
+                    </button>
+                    <button class="class-btn" onclick="app.startTestLevel(9)">
+                        <div class="class-num">9</div>
+                        <div class="class-label">9 клас</div>
+                    </button>
+                    <button class="class-btn" onclick="app.startTestLevel(10)">
+                        <div class="class-num">10</div>
+                        <div class="class-label">10 клас</div>
+                    </button>
+                    <button class="class-btn" onclick="app.startTestLevel(11)">
+                        <div class="class-num">11</div>
+                        <div class="class-label">11 клас</div>
+                    </button>
+                </div>
+            </main>
+        </div>
     </div>
 
     <script src="script.js"></script>

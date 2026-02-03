@@ -1,3 +1,164 @@
+// ===== APP НАВІГАЦІЯ =====
+class App {
+    showMenu() {
+        document.getElementById('menuScreen').classList.add('active');
+        document.getElementById('calculatorScreen').classList.remove('active');
+        document.getElementById('testsScreen').classList.remove('active');
+    }
+
+    showCalculator() {
+        document.getElementById('menuScreen').classList.remove('active');
+        document.getElementById('calculatorScreen').classList.add('active');
+        document.getElementById('testsScreen').classList.remove('active');
+        calc.clear();
+    }
+
+    showTests() {
+        document.getElementById('menuScreen').classList.remove('active');
+        document.getElementById('calculatorScreen').classList.remove('active');
+        document.getElementById('testsScreen').classList.add('active');
+        tests.startTest();
+    }
+}
+
+// ===== ТЕСТИ =====
+class MathTests {
+    constructor() {
+        this.questions = [
+            {
+                question: '2/3 + 1/6 = ?',
+                options: ['5/6', '3/9', '1/2', '2/5'],
+                correct: 0
+            },
+            {
+                question: '0.5 × 0.4 = ?',
+                options: ['0.2', '0.9', '0.8', '0.1'],
+                correct: 0
+            },
+            {
+                question: '7 - (-3) = ?',
+                options: ['4', '10', '-4', '-10'],
+                correct: 1
+            },
+            {
+                question: '1/2 + 1/3 = ?',
+                options: ['5/6', '2/5', '1/5', '3/4'],
+                correct: 0
+            },
+            {
+                question: '15 ÷ 3 = ?',
+                options: ['5', '6', '4', '3'],
+                correct: 0
+            },
+            {
+                question: '-5 + 10 = ?',
+                options: ['5', '-5', '15', '-15'],
+                correct: 0
+            },
+            {
+                question: '3/4 × 8 = ?',
+                options: ['6', '12', '8', '4'],
+                correct: 0
+            },
+            {
+                question: '100 - 45 = ?',
+                options: ['55', '65', '45', '75'],
+                correct: 0
+            },
+            {
+                question: '2 × 2 × 2 = ?',
+                options: ['8', '6', '4', '2'],
+                correct: 0
+            },
+            {
+                question: '9 + 6 = ?',
+                options: ['15', '14', '16', '13'],
+                correct: 0
+            }
+        ];
+        
+        this.currentQuestion = 0;
+        this.score = 0;
+        this.answered = false;
+    }
+
+    startTest() {
+        this.currentQuestion = 0;
+        this.score = 0;
+        this.answered = false;
+        this.showQuestion();
+    }
+
+    showQuestion() {
+        if (this.currentQuestion >= this.questions.length) {
+            this.showResults();
+            return;
+        }
+
+        const q = this.questions[this.currentQuestion];
+        let html = `
+            <div class="test-progress">Запитання ${this.currentQuestion + 1} з ${this.questions.length}</div>
+            <div class="test-question">${q.question}</div>
+            <div class="test-options">
+        `;
+
+        q.options.forEach((option, index) => {
+            html += `<button class="test-option" onclick="tests.selectAnswer(${index})">${option}</button>`;
+        });
+
+        html += '</div>';
+        document.getElementById('testContent').innerHTML = html;
+        this.answered = false;
+    }
+
+    selectAnswer(index) {
+        if (this.answered) return;
+        this.answered = true;
+
+        const q = this.questions[this.currentQuestion];
+        const buttons = document.querySelectorAll('.test-option');
+        
+        buttons.forEach((btn, i) => {
+            if (i === q.correct) {
+                btn.classList.add('correct');
+            } else if (i === index) {
+                btn.classList.add('incorrect');
+            }
+        });
+
+        if (index === q.correct) {
+            this.score++;
+        }
+
+        setTimeout(() => {
+            this.currentQuestion++;
+            this.showQuestion();
+        }, 1500);
+    }
+
+    showResults() {
+        const percentage = Math.round((this.score / this.questions.length) * 100);
+        let message = '';
+        
+        if (percentage === 100) message = '🌟 Відлично!';
+        else if (percentage >= 80) message = '⭐ Дуже добре!';
+        else if (percentage >= 60) message = '👍 Хорошо!';
+        else if (percentage >= 40) message = '📚 Потрібно потренуватися';
+        else message = '💪 Спробуй ще раз!';
+
+        const html = `
+            <div class="test-progress"></div>
+            <div class="test-result">
+                <div>${message}</div>
+                <div style="font-size: 2.5rem; margin: 20px 0;">${this.score}/${this.questions.length}</div>
+                <div>Правильних відповідей: ${percentage}%</div>
+                <button class="btn btn-equals" onclick="tests.startTest()" style="margin-top: 30px; width: 100%;">Пройти знову</button>
+            </div>
+        `;
+        document.getElementById('testContent').innerHTML = html;
+    }
+}
+
 // ===== КАЛЬКУЛЯТОР З ПІДТРИМКОЮ ДРОБІВ =====
 class Calculator {
     constructor() {
@@ -269,5 +430,10 @@ class Calculator {
     }
 }
 
-// Ініціалізація калькулятора
+// Ініціалізація
+const app = new App();
 const calc = new Calculator();
+const tests = new MathTests();
+
+// Показуємо меню на старті
+app.showMenu();
